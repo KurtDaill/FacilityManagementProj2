@@ -4,7 +4,7 @@ import src.FacilityPackage.*;
 import java.util.*;
 
 public class ScheduleManager {
-    private Map<String, List<TimeStamp>> facilityDirectory;
+    private Map<String, List<TimeStamp>> facilityDirectory = new HashMap<String, List<TimeStamp>>();
     private Date currentDate = new Date();
     private UsageManager useMan;
     private MaintenanceManager mainMan;
@@ -49,6 +49,12 @@ public class ScheduleManager {
     }
     
     public void updateFacilities(Facilities newFac){
+    	System.out.println(facilityDirectory);
+    	System.out.println(newFac.getName());
+    	LinkedList<TimeStamp> testingTheList = new LinkedList<TimeStamp>();
+    	testingTheList.add(null);
+    	facilityDirectory.put(newFac.getName(), testingTheList);
+    	System.out.println(facilityDirectory);
         facilityDirectory.put(newFac.getName(), new LinkedList<TimeStamp>());
     }
 }
