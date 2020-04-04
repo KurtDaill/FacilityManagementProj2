@@ -27,18 +27,21 @@ class usageManagerTest {
 		endCal.set(Calendar.HOUR, 4);
 		endCal.set(Calendar.MINUTE, 0);
 		Date end = endCal.getTime();
-		Facility fac = new Facility(null, null, null, 0, null, "fac1");
-		Map<String, List<TimeStamp>> schedule = new HashMap<String, List<TimeStamp>>();
-		Map<String, List<UsageTimeStamp>> usageSchedule = new HashMap<String, List<UsageTimeStamp>>();
-		List<TimeStamp> appt = new ArrayList<TimeStamp>();
-		List<UsageTimeStamp> UsageTimeStampList = new ArrayList<UsageTimeStamp>();
+		
+		LinkedList<TimeStamp> appt = new LinkedList<TimeStamp>();
+		LinkedList<UsageTimeStamp> UsageTimeStampList = new LinkedList<UsageTimeStamp>();
 		UsageTimeStamp maintAppt = new UsageTimeStamp(start,end,"tesing the dates");
 		appt.add(maintAppt);
-		usageSchedule.put("fac1", UsageTimeStampList);
-		schedule.put("fac1", appt);
-		ScheduleManager scheduleMan = new ScheduleManager(schedule, null, null, null);
-		UsageManager usageMan = new UsageManager(usageSchedule,null, null, scheduleMan);
-		assertEquals(usageMan.assignFacilityToUse("fac1", maintAppt), true);
+		UsageTimeStampList.add(maintAppt);
+		
+		Facility fac = new Facility(null, null, null, 0, null, "fac1");
+		ScheduleManager scheduleMan = new ScheduleManager(null, null, null);
+		UsageManager useMan = new UsageManager(null, scheduleMan);
+		MaintenanceManager maintMan = new MaintenanceManager(null, null);
+		FacilityTracker fact = new FacilityTracker(scheduleMan, useMan, maintMan);
+		fact.addFacility(fac, appt, UsageTimeStampList);
+		
+		assertEquals(useMan.assignFacilityToUse("fac1", maintAppt), true);
 	}
 	
 	@Test
@@ -55,15 +58,21 @@ class usageManagerTest {
 		endCal.set(Calendar.HOUR, 4);
 		endCal.set(Calendar.MINUTE, 0);
 		Date end = endCal.getTime();
-		Facility fac = new Facility(null, null, null, 0, null, "fac1");
-		Map<String, List<TimeStamp>> schedule = new HashMap<String, List<TimeStamp>>();
-		Map<String, List<UsageTimeStamp>> usageSchedule = new HashMap<String, List<UsageTimeStamp>>();
-		List<UsageTimeStamp> UsageTimeStampList = new ArrayList<UsageTimeStamp>();
-		UsageTimeStamp maintAppt = new UsageTimeStamp(start,end,"testing the dates");
+		
+		LinkedList<TimeStamp> appt = new LinkedList<TimeStamp>();
+		LinkedList<UsageTimeStamp> UsageTimeStampList = new LinkedList<UsageTimeStamp>();
+		UsageTimeStamp maintAppt = new UsageTimeStamp(start,end,"tesing the dates");
+		appt.add(maintAppt);
 		UsageTimeStampList.add(maintAppt);
-		usageSchedule.put("fac1", UsageTimeStampList);
-		UsageManager usageMan = new UsageManager(usageSchedule,null, null, null);
-		assertEquals(usageMan.listActualUsage("fac1").get(0).getStartTime(), start);
+		
+		Facility fac = new Facility(null, null, null, 0, null, "fac1");
+		ScheduleManager scheduleMan = new ScheduleManager(null, null, null);
+		UsageManager useMan = new UsageManager(null, scheduleMan);
+		MaintenanceManager maintMan = new MaintenanceManager(null, null);
+		FacilityTracker fact = new FacilityTracker(scheduleMan, useMan, maintMan);
+		fact.addFacility(fac, appt, UsageTimeStampList);
+		
+		assertEquals(useMan.listActualUsage("fac1").get(0).getStartTime(), start);
 	}
 
 }

@@ -52,7 +52,7 @@ public class UsageManager{
 		}
 	}
 
-	public void updateFacilities(Facilities newFac){
-		usageDirectory.put(newFac.getName(), new LinkedList<UsageTimeStamp>());
+	public void updateFacilities(Facilities newFac, LinkedList<UsageTimeStamp> newUsageTime){
+		usageDirectory.put(newFac.getName(), newUsageTime);
 	}
 }

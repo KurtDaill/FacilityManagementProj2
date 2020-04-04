@@ -1,6 +1,7 @@
 package src.FacilityPackage;
 import java.util.*;
 import src.ManagerPackage.*;
+import src.TimeStamps.*;
 public class FacilityTracker{
 	private Map<String, Facilities> facilityDirectory = new HashMap<String, Facilities>();
 	private ScheduleManager scheduleModule;
@@ -37,11 +38,11 @@ public class FacilityTracker{
 		lookUp(facName).getDetails().add(newDetail);
 	}
 
-	public void addFacility(Facilities newFac){
+	public void addFacility(Facilities newFac, LinkedList<TimeStamp> newTime, LinkedList<UsageTimeStamp> newUsageTime){
 		facilityDirectory.put(newFac.getName(), newFac);
-		scheduleModule.updateFacilities(newFac);
-		usageModule.updateFacilities(newFac);
-		maintModule.updateFacilities(newFac);
+		if(scheduleModule != null) scheduleModule.updateFacilities(newFac, newTime);
+		if(usageModule != null) usageModule.updateFacilities(newFac, newUsageTime);
+		if(maintModule != null) maintModule.updateFacilities(newFac);
 	}
 
 	public Facilities lookUp(String facName){

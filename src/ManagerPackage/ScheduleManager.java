@@ -48,7 +48,7 @@ public class ScheduleManager {
         mainMan.update(currentDate);
     }
     
-    public void updateFacilities(Facilities newFac){ 
-        facilityDirectory.put(newFac.getName(), new LinkedList<TimeStamp>());
+    public void updateFacilities(Facilities newFac, LinkedList<TimeStamp> newTime){ 
+    	facilityDirectory.put(newFac.getName(), newTime);
     }
 }

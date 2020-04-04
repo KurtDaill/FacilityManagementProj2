@@ -28,12 +28,15 @@ class scheduleManagerTest {
 		endCal.set(Calendar.MINUTE, 0);
 		Date end = endCal.getTime();
 		Facility fac = new Facility(null, null, null, 0, null, "fac1");
-		Map<String, List<TimeStamp>> schedule = new HashMap<String, List<TimeStamp>>();
-		List<TimeStamp> appt = new ArrayList<TimeStamp>();
+		LinkedList<TimeStamp> appt = new LinkedList<TimeStamp>();
 		UsageTimeStamp maintAppt = new UsageTimeStamp(start,end,"tesing the dates");
 		appt.add(maintAppt);
-		schedule.put("fac1", appt);
-		ScheduleManager scheduleMan = new ScheduleManager(schedule, null, null, null);
+		ScheduleManager scheduleMan = new ScheduleManager(null, null, null);
+		UsageManager useMan = new UsageManager(null, null);
+		MaintenanceManager maintMan = new MaintenanceManager(null, null);
+		
+		FacilityTracker fact = new FacilityTracker(scheduleMan, useMan, maintMan);
+		fact.addFacility(fac, appt,null);
 		assertEquals(scheduleMan.getSchedule("fac1").get(0).getStartTime(), start);
 	}
 	
@@ -53,13 +56,14 @@ class scheduleManagerTest {
 		endCal.set(Calendar.MINUTE, 0);
 		Date end = endCal.getTime();
 		Facility fac = new Facility(null, null, null, 0, null, "fac1");
-		Map<String, List<TimeStamp>> schedule = new HashMap<String, List<TimeStamp>>();
-		List<TimeStamp> appt = new ArrayList<TimeStamp>();
+		LinkedList<TimeStamp> appt = new LinkedList<TimeStamp>();
 		UsageTimeStamp maintAppt = new UsageTimeStamp(start,end,"tesing the dates");
 		appt.add(maintAppt);
-		schedule.put("fac1", appt);
-		ScheduleManager scheduleMan = new ScheduleManager(schedule, null, null, null);
+		ScheduleManager scheduleMan = new ScheduleManager(null, null, null);
+		UsageManager useMan = new UsageManager(null, scheduleMan);
+		MaintenanceManager maintMan = new MaintenanceManager(null, null);
+		FacilityTracker fact = new FacilityTracker(scheduleMan, useMan, maintMan);
+		fact.addFacility(fac, appt,null);
 		assertEquals(scheduleMan.isInUseDuringInterval("fac1", maintAppt), false);
 	}
-
 }

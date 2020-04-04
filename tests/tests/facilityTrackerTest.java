@@ -17,7 +17,7 @@ class facilityTrackerTest {
 		UsageManager usageMan = new UsageManager(null, null);
 		MaintenanceManager maintMan = new MaintenanceManager(null, null);
 		FacilityTracker fact = new FacilityTracker(scheduleMan ,usageMan, maintMan);
-		fact.addFacility(fac);
+		fact.addFacility(fac,null,null);
 		System.out.println(fact.listFacilityProblems("fac1"));
 		//assertEquals(fact.listFacilityProblems("fac1").contains("This is a problem"), true);
 	}
@@ -32,7 +32,7 @@ class facilityTrackerTest {
 		UsageManager usageMan = new UsageManager(null, null);
 		MaintenanceManager maintMan = new MaintenanceManager(null, null);
 		FacilityTracker fact = new FacilityTracker(scheduleMan ,usageMan, maintMan);
-		fact.addFacility(fac);
+		fact.addFacility(fac,null,null);
 		assertEquals(fact.listInspections("fac1").contains("This is an inspection"), true);
 	}
 	
@@ -46,7 +46,7 @@ class facilityTrackerTest {
 		UsageManager usageMan = new UsageManager(null, null);
 		MaintenanceManager maintMan = new MaintenanceManager(null, null);
 		FacilityTracker fact = new FacilityTracker(scheduleMan ,usageMan, maintMan);
-		fact.addFacility(fac);
+		fact.addFacility(fac,null,null);
 		assertEquals(fact.getFacilityInformation("fac1").contains("This is a detail"), true);
 	}
 	
@@ -57,7 +57,7 @@ class facilityTrackerTest {
 		UsageManager usageMan = new UsageManager(null, null);
 		MaintenanceManager maintMan = new MaintenanceManager(null, null);
 		FacilityTracker fact = new FacilityTracker(scheduleMan ,usageMan, maintMan);
-		fact.addFacility(fac);
+		fact.addFacility(fac,null,null);
 		assertEquals(fact.getAvailableCapacity("fac1"), 150);
 	}
 	
@@ -78,7 +78,7 @@ class facilityTrackerTest {
 		UsageManager usageMan = new UsageManager(null, null);
 		MaintenanceManager maintMan = new MaintenanceManager(null, null);
 		FacilityTracker fact = new FacilityTracker(scheduleMan ,usageMan, maintMan);
-		fact.addFacility(fac);
+		fact.addFacility(fac,null,null);
 		assertEquals(fact.calcProblemRateForFacility("fac1"), 2);
 	}
 }
