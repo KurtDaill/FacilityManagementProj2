@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+<description>Wiring the dependencies for the facility management application.</description>
+
+<context:component-scan base-package="FacilityManagementProj2" />
+
+<bean id="facilities" class="src.FacilityPackage.Facilities" scope="prototype"/>
+
+<bean id="facility" class="src.FacilityPackage.Facility" scope="prototype"/>
+
+<bean id="facilityTracker" class="src.FacilityPackage.FacilityTracker" scope="prototype"/>
+
+<bean id="maintenanceMan" class="src.ManagerPackage.MaintenanceManager" scope="prototype"/>
+
+<bean id="scheduleMan" class="src.ManagerPackage.ScheduleManager" scope="prototype"/>
+
+<bean id="tuple" class="src.ManagerPackage.Tuple" scope="prototype"/>
+
+<bean id="usageMan" class="src.ManagerPackage.UsageManager" scope="prototype"/>
+
+<bean id="maintTimeStamp" class="src.TimeStamps.MaintTimeStamp" scope="prototype"/>
+
+<bean id="timestamp" class="src.TimeStamp.TimeStamp" scope="prototype"/>
+
+<bean id="usageTimeStamp" class="src.TimeStamps.UsageTimeStamp" scope="prototype"/>
+
+</beans>
